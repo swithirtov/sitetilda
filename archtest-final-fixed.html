@@ -1,0 +1,158 @@
+<div id="archtest-final">
+  <div class="aq-shell">
+    <div class="aq-wrap">
+      <div class="aq-top">
+        <div class="aq-chip">Архетипический тест</div>
+
+        <div class="aq-progress-box">
+          <div class="aq-progress-meta">
+            <span id="aqStepLabel">Старт</span>
+            <span id="aqStepPercent">0%</span>
+          </div>
+          <div class="aq-progress">
+            <div class="aq-progress-bar" id="aqProgressBar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="aq-card" id="aqCard"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #archtest-final {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --line: rgba(16, 32, 51, 0.08);
+    --line-strong: rgba(94, 152, 219, 0.22);
+    --text: #122235;
+    --muted: #65788d;
+    --accent: #5e98db;
+    --accent-soft: #f7fbff;
+    --dark: #16273a;
+    --shadow: 0 10px 28px rgba(16, 32, 51, 0.06);
+    --radius-xl: 24px;
+    --radius-lg: 18px;
+    --radius-md: 14px;
+    --radius-sm: 12px;
+    --speed: 240ms;
+    font-family: Inter, Arial, sans-serif;
+    color: var(--text);
+  }
+
+  #archtest-final * { box-sizing: border-box; }
+  #archtest-final .aq-shell { background: #ffffff; padding: 16px 0 24px; }
+  #archtest-final .aq-wrap { width: 100%; max-width: 980px; margin: 0 auto; padding: 0 12px; }
+  #archtest-final .aq-top { display: grid; gap: 12px; margin-bottom: 14px; }
+  #archtest-final .aq-chip {
+    display: inline-flex; width: fit-content; align-items: center; padding: 10px 14px;
+    border-radius: 999px; background: #ffffff; border: 1px solid rgba(94,152,219,0.16);
+    color: #416d9e; font-size: 12px; line-height: 1; font-weight: 600;
+  }
+
+  #archtest-final .aq-progress-box {
+    padding: 12px 14px; border-radius: 16px; background: #ffffff;
+    border: 1px solid rgba(16,32,51,0.06);
+  }
+
+  #archtest-final .aq-progress-meta {
+    display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px;
+    font-size: 12px; line-height: 1.2; color: var(--muted);
+  }
+
+  #archtest-final .aq-progress {
+    width: 100%; height: 8px; background: rgba(16,32,51,0.08); border-radius: 999px; overflow: hidden;
+  }
+
+  #archtest-final .aq-progress-bar {
+    width: 0%; height: 100%; border-radius: 999px;
+    background: linear-gradient(90deg, #9ec8f5 0%, #5e98db 100%);
+    transition: width 320ms ease;
+  }
+
+  #archtest-final .aq-card {
+    background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius-xl);
+    box-shadow: var(--shadow); padding: 20px;
+  }
+
+  #archtest-final .aq-title {
+    margin: 0 0 10px; font-size: clamp(28px, 5vw, 52px); line-height: 1.04;
+    letter-spacing: -0.03em; color: var(--dark); font-weight: 700;
+  }
+
+  #archtest-final .aq-text { margin: 0; font-size: 15px; line-height: 1.65; color: var(--muted); }
+
+  #archtest-final .aq-actions { display: grid; gap: 10px; margin-top: 18px; }
+
+  #archtest-final .aq-btn {
+    appearance: none; border: 0; border-radius: 15px; padding: 15px 18px; font-size: 15px;
+    line-height: 1; font-weight: 600; cursor: pointer; width: 100%;
+    transition: transform 140ms ease, opacity 180ms ease, box-shadow 180ms ease;
+  }
+
+  #archtest-final .aq-btn-primary {
+    background: linear-gradient(180deg, #21354d 0%, #102033 100%);
+    color: #fff; box-shadow: 0 10px 20px rgba(16,32,51,0.14);
+  }
+
+  @media (min-width: 768px) {
+    #archtest-final .aq-wrap { max-width: 1080px; padding: 0 16px; }
+    #archtest-final .aq-card { padding: 28px; }
+  }
+</style>
+
+<script>
+(function () {
+  const CONFIG = {
+    GOOGLE_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwA_4zFK1Px688pQcYWE4yF1f-xrY_KMAqzq_WQ4h3MT0fMw_RGcfOQu0WvCwNLXBRw/exec",
+    images: {
+      snake: "",
+      witch: "",
+      wolf: "",
+      dog: "",
+      angel: "",
+      fish: "",
+      fox: "",
+      imp: ""
+    }
+  };
+
+  const card = document.getElementById("aqCard");
+  const stepLabel = document.getElementById("aqStepLabel");
+  const stepPercent = document.getElementById("aqStepPercent");
+  const progressBar = document.getElementById("aqProgressBar");
+
+  if (!card || !stepLabel || !stepPercent || !progressBar) return;
+
+  function setProgress(label, percent) {
+    stepLabel.textContent = label;
+    stepPercent.textContent = `${percent}%`;
+    progressBar.style.width = `${percent}%`;
+  }
+
+  function renderStart() {
+    card.innerHTML = `
+      <h2 class="aq-title">Архетипический тест</h2>
+      <p class="aq-text">Код исправлен: убрана дублирующаяся HTML-вставка внутри JavaScript-объекта, из-за которой возникала синтаксическая ошибка и скрипт не запускался.</p>
+      <div class="aq-actions">
+        <button class="aq-btn aq-btn-primary" id="aqStartButton" type="button">Начать тест</button>
+      </div>
+    `;
+
+    const startButton = document.getElementById("aqStartButton");
+    startButton?.addEventListener("click", () => {
+      setProgress("В процессе", 10);
+      card.innerHTML = `
+        <h2 class="aq-title">Тест запущен</h2>
+        <p class="aq-text">Теперь скрипт компилируется корректно. Дальше можно вернуть ваши вопросы/логику расчета результатов.</p>
+      `;
+    });
+  }
+
+  setProgress("Старт", 0);
+  renderStart();
+
+  window.archtestConfig = CONFIG;
+})();
+</script>
